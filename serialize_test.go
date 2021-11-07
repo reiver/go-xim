@@ -8,7 +8,6 @@ func TestSerialize(t *testing.T) {
 
 	tests := []struct{
 		Value uint64
-		Expected string
 	}{
 		{
 			Value: 0b0000000000000000000000000000000000000000000000000000000000000000,
