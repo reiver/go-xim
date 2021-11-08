@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	serializationprefix = "x"
-	serializationsuffix = ".id"
+	serializationprefix = "xi"
+	serializationsuffix = "m"
 )
 
 var (
@@ -27,7 +27,6 @@ func serialize(value uint64) string {
 
 	var binstorage bytes.Buffer
 	{
-
 		err := binary.Write(&binstorage, binary.BigEndian, value)
 		if nil != err {
 			return ""
@@ -84,10 +83,14 @@ func unserialize(value string) (uint64, bool) {
 
 	var result uint64
 	{
-		var reader io.Reader = bytes.NewReader(p)
+		var reader *bytes.Reader = bytes.NewReader(p)
 
 		err := binary.Read(reader, binary.BigEndian, &result)
 		if nil != err {
+			return badvalue, false
+		}
+
+		if expected, actual := 0, reader.Len(); expected != actual {
 			return badvalue, false
 		}
 	}
