@@ -84,7 +84,7 @@ func (receiver ID) String() string {
 	return serialized
 }
 
-// UnmarshalText makes xim.ID fit the encoding.TextMarshaler interface.
+// MarshalText makes xim.ID fit the encoding.TextMarshaler interface.
 func (receiver ID) MarshalText() (text []byte, err error) {
 	if Nothing() == receiver {
 		return nil, errNothing
