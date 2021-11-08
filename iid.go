@@ -1,4 +1,4 @@
-package iid
+package xim
 
 // IID represents an interaction‐identifier — i.e., an interaction‐ID — i.e., an IID.
 //

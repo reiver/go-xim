@@ -1,4 +1,4 @@
-package iid
+package xim
 
 var (
 	stdtests = []struct{

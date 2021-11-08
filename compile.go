@@ -1,4 +1,4 @@
-package iid
+package xim
 
 const (
 	maxbitwidth = 64
