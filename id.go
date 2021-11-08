@@ -49,6 +49,26 @@ func Generate() ID {
 	return something(value)
 }
 
+// GenerateForMoment returns a new xim-id that has embedded in it the time given by the unix-timestamp in the variable ‘unixtimestamp’.
+//
+// Example usage:
+//
+//	var unixTimeStamp int32 = 1636403305 // I.e., Monday, November 8, 2021 12:28:25 PM GMT-08:00
+//	
+//	var id xim.ID = xim.GenerateForMoment(unixTimeStamp)
+//	
+//	fmt.Println("xim-id =", id)
+//
+// The chaos part of this xim-id will be chosen randomly (just like with xim.Generate()).
+func GenerateForMoment(unixtimestamp int32) ID {
+
+	var when int64 = int64(unixtimestamp)
+
+	var value uint64 = generateformoment(when)
+
+	return something(value)
+}
+
 // Chaos returns the randomness that is embeddd in the xim-id.
 //
 // Example usage:

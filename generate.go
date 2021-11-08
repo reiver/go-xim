@@ -11,10 +11,15 @@ var (
 
 func generate() uint64 {
 
-	var now    int64 = time.Now().Unix()
+	var now int64 = time.Now().Unix()
+	return generateformoment(now)
+}
+
+func generateformoment(unixtimestamp int64) uint64 {
 	var chaos uint64 = randomness.Uint64()
 
-	var value uint64 = compile(uint64(now), chaos)
+	var value uint64 = compile(uint64(unixtimestamp), chaos)
 
 	return value
+
 }
