@@ -39,6 +39,33 @@ func something(value uint64) ID {
 	}
 }
 
+// Parse parses the string contained in the input-variable ‘ximnotation’, and if it contains a valid xim-id (in xim-notation), then it returns it.
+//
+// If the value of the input-variable ‘ximnotation’ is not a valid (xim-notation) xim-id, then it returns the option-type value nothing.
+//
+// An example usage might be:
+//
+//	var ximid string = "xi-558YtmR06wm"
+//	
+//	// ...
+//	
+//	var id xim.ID = xim.Parse(ximid)
+//	if xim.Nothing() == id {
+//		fmt.Fprintf(os.Stderr, "error: invalid xim-id — %q \n", ximid)
+//		return
+//	}
+//
+//	fmt.Printf("SUCCESS! the xim-id is \n", id)
+func Parse(ximnotation string) ID {
+
+	value, successful := unserialize(ximnotation)
+	if !successful {
+		return  Nothing()
+	}
+
+	return something(value)
+}
+
 // Generate returns a new xim-id.
 //
 // Example usage:
