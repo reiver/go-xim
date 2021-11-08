@@ -2,6 +2,8 @@
 
 Package **iid** provides quazi‐ monotonically‐increasing unique‐identifiers.
 
+The serialized form of the **IID** is safe to use as a _file_ or _directory_ name.
+
 
 ## Documention
 
