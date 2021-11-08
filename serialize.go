@@ -10,6 +10,7 @@ import (
 
 const (
 	serializationprefix = "x"
+	serializationsuffix = ".id"
 )
 
 var (
@@ -46,6 +47,9 @@ func serialize(value uint64) string {
 		wc.Close()
 
 	}
+	{
+		encoded.WriteString(serializationsuffix)
+	}
 
 	return encoded.String()
 }
@@ -58,6 +62,14 @@ func unserialize(value string) (uint64, bool) {
 		}
 
 		value = value[len(serializationprefix):]
+	}
+
+	{
+		if !strings.HasSuffix(value, serializationsuffix) {
+			return badvalue, false
+		}
+
+		value = value[:len(value)-len(serializationsuffix)]
 	}
 
 	var p []byte
