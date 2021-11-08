@@ -13,6 +13,7 @@ func TestSerialize(t *testing.T) {
 		actual, successful := unserialize(serialized)
 		if !successful {
 			t.Errorf("For test #%d, expected unserialization of serialized data to be successful but wasn't." , testNumber)
+			t.Logf("SERIALIZED: %s", serialized)
 			t.Logf("SUCCESSFUL: %t", successful)
 			t.Logf("VALUE: %064b", test.Value)
 			continue
@@ -21,6 +22,7 @@ func TestSerialize(t *testing.T) {
 
 		if expected := test.Value; expected != actual {
 			t.Errorf("For test #%d, ", testNumber)
+			t.Logf("SERIALIZED: %s", serialized)
 			t.Logf("SUCCESSFUL: %t", successful)
 			t.Logf("EXPECTED: %064b", expected)
 			t.Logf("ACTUAL:   %064b", actual)

@@ -5,6 +5,11 @@ import (
 	"encoding/base64"
 	"encoding/binary"
 	"io"
+	"strings"
+)
+
+const (
+	serializationprefix = "x"
 )
 
 var (
@@ -19,24 +24,41 @@ var (
 
 func serialize(value uint64) string {
 
-	var storage bytes.Buffer
+	var binstorage bytes.Buffer
 	{
 
-		err := binary.Write(&storage, binary.BigEndian, value)
+		err := binary.Write(&binstorage, binary.BigEndian, value)
 		if nil != err {
 			return ""
 		}
 	}
 
-	var encoded string
+	var encoded strings.Builder
 	{
-		encoded = base64encoding.EncodeToString(storage.Bytes())
+		encoded.WriteString(serializationprefix)
+	}
+	{
+		var wc io.WriteCloser = base64.NewEncoder(base64encoding, &encoded)
+		if nil == wc {
+			return ""
+		}
+		wc.Write(binstorage.Bytes())
+		wc.Close()
+
 	}
 
-	return encoded
+	return encoded.String()
 }
 
 func unserialize(value string) (uint64, bool) {
+
+	{
+		if !strings.HasPrefix(value, serializationprefix) {
+			return badvalue, false
+		}
+
+		value = value[len(serializationprefix):]
+	}
 
 	var p []byte
 	{
