@@ -1,22 +1,22 @@
-# go-iid
+# go-xim
 
-Package **iid** provides quazi‐ monotonically‐increasing unique‐identifiers.
+Package **xim** provides quazi‐ monotonically‐increasing unique‐identifiers.
 
 The serialized form of the **IID** is safe to use as a _file_ or _directory_ name.
 
 
 ## Documention
 
-Online documentation, which includes examples, can be found at: http://godoc.org/github.com/reiver/go-iid
+Online documentation, which includes examples, can be found at: http://godoc.org/github.com/reiver/go-xim
 
-[![GoDoc](https://godoc.org/github.com/reiver/go-iid?status.svg)](https://godoc.org/github.com/reiver/go-iid)
+[![GoDoc](https://godoc.org/github.com/reiver/go-xim?status.svg)](https://godoc.org/github.com/reiver/go-xim)
 
 
 ## Example
 
-Here is an example of using `package iid`:
+Here is an example of using `package xim`:
 ```go
-var id iid.IID = iid.Generate()
+var id xim.IID = xim.Generate()
 ```
 
 ## Representation
@@ -30,9 +30,9 @@ Internally, the IID is compactly stored in an `uint64`. The anatomy of this is a
   always zero (1-bit)                                  chaos (20-bits)
 ```
 
-The `iid.IID.UnixTime()` method will give you that 39-bit _unix timestamp_.
+The `xim.IID.UnixTime()` method will give you that 39-bit _unix timestamp_.
 
-And the `iid.IID.Chaos()` method will give you that 24-bit _chaos_.
+And the `xim.IID.Chaos()` method will give you that 24-bit _chaos_.
 
 (The _chaos_ is just a randomness that helps make these IIDs unique, when multiple IIDs are being produced simultaneously.)
 
