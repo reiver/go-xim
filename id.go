@@ -71,6 +71,17 @@ func (receiver ID) Chaos() (uint64, bool) {
 	return value, true
 }
 
+// MarshalText makes xim.ID fit the encoding.TextMarshaler interface.
+func (receiver ID) MarshalText() (text []byte, err error) {
+	if Nothing() == receiver {
+		return nil, errNothing
+	}
+
+	var serialized string = serialize(receiver.value)
+
+	return []byte(serialized), nil
+}
+
 // String makes xim.ID fit the fmt.Stringer interface.
 //
 // String also returns the serialized for of a xim-id, in xim-notation.
@@ -82,17 +93,6 @@ func (receiver ID) String() string {
 	var serialized string = serialize(receiver.value)
 
 	return serialized
-}
-
-// MarshalText makes xim.ID fit the encoding.TextMarshaler interface.
-func (receiver ID) MarshalText() (text []byte, err error) {
-	if Nothing() == receiver {
-		return nil, errNothing
-	}
-
-	var serialized string = serialize(receiver.value)
-
-	return []byte(serialized), nil
 }
 
 // UnixTime returns the unix‐time that is embeddd in the xim-id.
