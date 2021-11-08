@@ -2,7 +2,7 @@
 
 Package **xim** provides quazi‐ monotonically‐increasing unique‐identifiers.
 
-The serialized form of the **IID** is safe to use as a _file_ or _directory_ name.
+The serialized form of the **xim-id** is safe to use as a _file_ or _directory_ name.
 
 
 ## Documention
@@ -16,12 +16,12 @@ Online documentation, which includes examples, can be found at: http://godoc.org
 
 Here is an example of using `package xim`:
 ```go
-var id xim.IID = xim.Generate()
+var id xim.ID = xim.Generate()
 ```
 
 ## Representation
 
-Internally, the IID is compactly stored in an `uint64`. The anatomy of this is as follows:
+Internally, the xim-id is compactly stored in an `uint64`. The anatomy of this is as follows:
 ```
                    unix timestamp (39-bits)
        ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -30,11 +30,11 @@ Internally, the IID is compactly stored in an `uint64`. The anatomy of this is a
   always zero (1-bit)                                  chaos (20-bits)
 ```
 
-The `xim.IID.UnixTime()` method will give you that 39-bit _unix timestamp_.
+The `xim.ID.UnixTime()` method will give you that 39-bit _unix timestamp_.
 
-And the `xim.IID.Chaos()` method will give you that 24-bit _chaos_.
+And the `xim.ID.Chaos()` method will give you that 24-bit _chaos_.
 
-(The _chaos_ is just a randomness that helps make these IIDs unique, when multiple IIDs are being produced simultaneously.)
+(The _chaos_ is just a randomness that helps make these xim-ids unique, when multiple xim-ids are being produced simultaneously.)
 
 ## Temporal Ordering of Representation
 

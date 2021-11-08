@@ -4,17 +4,17 @@ import (
 	"testing"
 )
 
-func TestIID_MarshalText(t *testing.T) {
+func TestID_MarshalText(t *testing.T) {
 
 	for testNumber, test := range stdtests {
 
-		var intid IID = something(test.Value)
+		var id ID = something(test.Value)
 
 		var marshaled []byte
 		{
 			var err error
 
-			marshaled, err = intid.MarshalText()
+			marshaled, err = id.MarshalText()
 			if nil != err {
 				t.Errorf("For test #%d, did not expect an error when mashaling, but actually got one.", testNumber)
 				t.Logf("VALUE: %064b", test.Value)
@@ -30,9 +30,9 @@ func TestIID_MarshalText(t *testing.T) {
 		}
 
 		{
-			var newintid IID
+			var newid ID
 
-			err := newintid.UnmarshalText(marshaled)
+			err := newid.UnmarshalText(marshaled)
 			if nil != err {
 				t.Errorf("For test #%d, did not expect an error when unmashaling, but actually got one.", testNumber)
 				t.Logf("VALUE: %064b", test.Value)
@@ -42,8 +42,8 @@ func TestIID_MarshalText(t *testing.T) {
 			}
 
 
-			var expected IID = intid
-			var actual   IID = newintid
+			var expected ID = id
+			var actual   ID = newid
 
 			if expected != actual {
 				t.Errorf("For test #%d, the actual unmarshaled marshaled value is not what was expected.", testNumber)
