@@ -203,3 +203,7 @@ The advantage of this is that lexical-ordering (in Unicode & ASCII) is also symb
 One design goal is that lexical ordering of the **xim** strings is (almost always) also temporal ordering of the **xim** strings.
 
 Another design goal of it is that these **xim** strings should be able to be used as a file-name, or a directory-name.
+
+## See Also:
+
+* https://github.com/reiver/xim-id
