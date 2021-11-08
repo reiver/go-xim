@@ -1,5 +1,9 @@
 package xim
 
+import (
+	"time"
+)
+
 // ID represents a xim-id.
 //
 // It is a scheme used to generate quazi‐monotonically‐increasing‐unique identifier.
@@ -49,22 +53,44 @@ func Generate() ID {
 	return something(value)
 }
 
-// GenerateForMoment returns a new xim-id that has embedded in it the time given by the unix-timestamp in the variable ‘unixtimestamp’.
+// GenerateForTime returns a new xim-id that has embedded in it the time given by the value in the input-variable ‘when’.
+//
+// Example usage:
+//
+//	var moment time.Time = ???
+//	
+//	// ...
+//	
+//	var id xim.ID = xim.GenerateForTime(moment)
+//	
+//	fmt.Println("xim-id =", id)
+//
+// The chaos part of this xim-id will be chosen randomly (just like with xim.Generate()).
+func GenerateForTime(when time.Time) ID {
+
+	var unixtimestamp int64 = when.Unix()
+
+	var value uint64 = generateforunixtime(unixtimestamp)
+
+	return something(value)
+}
+
+// GenerateForUnixTime returns a new xim-id that has embedded in it the time given by the unix-timestamp in the input-variable ‘unixtimestamp’.
 //
 // Example usage:
 //
 //	var unixTimeStamp int32 = 1636403305 // I.e., Monday, November 8, 2021 12:28:25 PM GMT-08:00
 //	
-//	var id xim.ID = xim.GenerateForMoment(unixTimeStamp)
+//	var id xim.ID = xim.GenerateForUnixTime(unixTimeStamp)
 //	
 //	fmt.Println("xim-id =", id)
 //
 // The chaos part of this xim-id will be chosen randomly (just like with xim.Generate()).
-func GenerateForMoment(unixtimestamp int32) ID {
+func GenerateForUnixTime(unixtimestamp int32) ID {
 
 	var when int64 = int64(unixtimestamp)
 
-	var value uint64 = generateformoment(when)
+	var value uint64 = generateforunixtime(when)
 
 	return something(value)
 }
