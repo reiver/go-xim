@@ -5,8 +5,8 @@ const (
 )
 
 const (
-	maskfirst  = 0b0111111111111111111111111111111111111111000000000000000000000000
-	masksecond = 0b0000000000000000000000000000000000000000111111111111111111111111
+	maskunixtime = 0b0111111111111111111111111111111111111111000000000000000000000000
+	maskchaos    = 0b0000000000000000000000000000000000000000111111111111111111111111
 )
 
 const (
@@ -16,7 +16,7 @@ const (
 
 func compile(first uint64, second uint64) uint64 {
 
-	var compiled uint64 = ((first << widthsecond) & maskfirst) | (second & masksecond)
+	var compiled uint64 = ((first << widthsecond) & maskunixtime) | (second & maskchaos)
 
 	return compiled
 
@@ -24,8 +24,8 @@ func compile(first uint64, second uint64) uint64 {
 
 func decompile(value uint64) (uint64, uint64) {
 
-	var first  uint64 = (value & maskfirst) >> widthsecond
-	var second uint64 =  value & masksecond
+	var first  uint64 = (value & maskunixtime) >> widthsecond
+	var second uint64 =  value & maskchaos
 
 	return first, second
 }
